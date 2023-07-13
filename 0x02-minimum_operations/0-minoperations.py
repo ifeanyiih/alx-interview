@@ -18,9 +18,7 @@ def minOperations(n: int) -> int:
     copyAll = 1
     paste = 1
     s = 'HH'
-    while True:
-        if len(s) == n:
-            break
+    while len(s) != n:
         if n % len(s) == 0:
             copyAll += 1
             paste += 1
