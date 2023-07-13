@@ -17,10 +17,8 @@ def minOperations(n: int) -> int:
         return 0
     if not math.isfinite(n):
         return 0
-    if n <= 0:
+    if n < 2:
         return 0
-    if n == 1:
-        return 1
     c = 'H'
     copyAll = 1
     paste = 1
