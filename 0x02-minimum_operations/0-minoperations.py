@@ -7,12 +7,15 @@ of operations needed to result in exactly n H characters in the file
     Returns an integer
     If n is impossible to achieve, return 0
 """
+import math
 
 
 def minOperations(n: int) -> int:
     """Calculates the fewest number of operations
     needed to result in exactly n H characters"""
     if type(n) not in [int]:
+        return 0
+    if not math.isfinite(n):
         return 0
     if n < 2:
         return 0
