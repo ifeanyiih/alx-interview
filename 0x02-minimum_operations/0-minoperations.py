@@ -14,10 +14,10 @@ def minOperations(n: int) -> int:
     needed to result in exactly n H characters"""
     if n <= 1:
         return 0
-    c: str = 'H'
-    copyAll: int = 1
-    paste: int = 1
-    s: str = 'HH'
+    c = 'H'
+    copyAll = 1
+    paste = 1
+    s = 'HH'
     while True:
         if len(s) == n:
             break
