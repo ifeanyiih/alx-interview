@@ -12,7 +12,7 @@ of operations needed to result in exactly n H characters in the file
 def minOperations(n: int) -> int:
     """Calculates the fewest number of operations
     needed to result in exactly n H characters"""
-    if n <= 1:
+    if n < 2:
         return 0
     c = 'H'
     copyAll = 1
@@ -23,7 +23,7 @@ def minOperations(n: int) -> int:
             copyAll += 1
             paste += 1
             c = s
-            s = s * 2
+            s = s + c
         else:
             s = s + c
             paste += 1
