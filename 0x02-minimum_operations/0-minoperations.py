@@ -13,23 +13,11 @@ import math
 def minOperations(n: int) -> int:
     """Calculates the fewest number of operations
     needed to result in exactly n H characters"""
-    if type(n) not in [int]:
-        return 0
-    if not math.isfinite(n):
-        return 0
-    if n < 2:
-        return 0
-    c = 'H'
-    copyAll = 1
-    paste = 1
-    s = 'HH'
-    while len(s) != n:
-        if n % len(s) == 0:
-            copyAll += 1
-            paste += 1
-            c = s
-            s = s + c
-        else:
-            s = s + c
-            paste += 1
-    return (copyAll + paste)
+    ops = 0
+    min_ops = 2
+    while n > 1:
+        while n % min_ops == 0:
+            ops += min_ops
+            n /= min_ops
+        min_ops += 1
+    return ops
