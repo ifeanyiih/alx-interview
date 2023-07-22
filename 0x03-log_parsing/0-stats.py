@@ -3,8 +3,8 @@
 import sys
 import re
 
-pattern = r'(\d+\.\d+\.\d+\.\d+)'\
-    r' - \[(.*?)\] "GET /projects/260 HTTP/1\.1" (.+) (\d+)'
+pattern = r'^(\d+\.\d+\.\d+\.\d+)'\
+    r' - \[(.*?)\] "GET /projects/260 HTTP/1\.1" (.+) (\d+)$'
 count = 0
 status_codes = {}
 total_file_size = 0
