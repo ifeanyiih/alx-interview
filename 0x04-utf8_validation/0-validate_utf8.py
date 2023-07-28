@@ -15,20 +15,6 @@ For 1 byte UTF-8 characters, the most significant bit is 0
 """
 
 
-def parseBin(n):
-    """parse a given integer to binary"""
-    bin_str = ""
-    num = n
-    while num > 0:
-        bin_str = str(num % 2) + bin_str
-        num //= 2
-    if len(bin_str) < 8:
-        bin_str = '0' + bin_str
-    if len(bin_str) > 8:
-        bin_str = bin_str[len(bin_str) - 8:]
-    return bin_str
-
-
 def validUTF8(data):
     """Validates UTF-8 data
     Args:
@@ -36,37 +22,47 @@ def validUTF8(data):
     Returns:
         bool: True if valid, else False
     """
-    toVal = map(lambda n: n & 128, data)
-    bins = list(map(parseBin, data))
+    shift = 7
+    binary_data = []
     any_ = []
-    for n in range(len(bins)):
-        if bins[n].startswith('0'):
+    for n in data:
+        shift = 7
+        bin_ = ""
+        while shift >= 0:
+            if n & (1 << shift):
+                digit = 1
+            else:
+                digit = 0
+            bin_ += str(digit)
+            shift -= 1
+        binary_data.append(bin_)
+
+    for n in range(len(binary_data)):
+        if binary_data[n].startswith('0'):
             any_.append(0)
-        elif bins[n].startswith('110'):
-            if bins[n + 1].startswith('10'):
+        elif binary_data[n].startswith('110'):
+            if binary_data[n + 1].startswith('10'):
                 any_.append(0)
-                n += 2
+                n = n + 2
             else:
                 any_.append(1)
-                break
-        elif bins[n].startswith('1110'):
-            if bins[n + 1].startswith('10') and bins[n + 2].startswith('10'):
+        elif binary_data[n].startswith('1110'):
+            if binary_data[n + 1].startswith('10') and \
+                    binary_data[n + 2].startswith('10'):
                 any_.append(0)
-                n += 3
-                continue
+                n = n + 3
             else:
                 any_.append(1)
-                break
-        elif bins[n].startswith('11110'):
-            if bins[n + 1].startswith('10') and \
-                bins[n + 2].startswith('10') and \
-                    bins[n + 3].startswith('10'):
+        elif binary_data[n].startswith('11110'):
+            if binary_data[n + 1].startswith('10') and \
+                binary_data[n + 2].startswith('10') and \
+                    binary_data[n + 3].startswith('10'):
                 any_.append(0)
-                n += 4
-                continue
+                n = n + 4
             else:
                 any_.append(1)
-                break
+        else:
+            any_.append(1)
 
     if any(any_):
         return False
