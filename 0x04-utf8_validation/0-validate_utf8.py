@@ -37,32 +37,41 @@ def validUTF8(data):
             shift -= 1
         binary_data.append(bin_)
 
-    for n in range(len(binary_data)):
+
+    n = 0
+    while n < len(binary_data):
         if binary_data[n].startswith('0'):
             any_.append(0)
         elif binary_data[n].startswith('110'):
-            if binary_data[n + 1].startswith('10'):
+            if (n + 1) < len(binary_data) \
+                    and binary_data[n + 1].startswith('10'):
                 any_.append(0)
                 n = n + 2
+                continue
             else:
                 any_.append(1)
         elif binary_data[n].startswith('1110'):
-            if binary_data[n + 1].startswith('10') and \
+            if (n + 2) < len(binary_data) \
+                and binary_data[n + 1].startswith('10') and \
                     binary_data[n + 2].startswith('10'):
                 any_.append(0)
                 n = n + 3
+                continue
             else:
                 any_.append(1)
         elif binary_data[n].startswith('11110'):
-            if binary_data[n + 1].startswith('10') and \
+            if (n + 3) < len(binary_data) \
+                and binary_data[n + 1].startswith('10') and \
                 binary_data[n + 2].startswith('10') and \
                     binary_data[n + 3].startswith('10'):
                 any_.append(0)
                 n = n + 4
+                continue
             else:
                 any_.append(1)
         else:
             any_.append(1)
+        n = n + 1
 
     if any(any_):
         return False
