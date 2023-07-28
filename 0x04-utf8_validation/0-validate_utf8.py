@@ -70,6 +70,5 @@ def validUTF8(data):
                 break
 
     if any(toVal):
-#   if any(any_):
         return False
     return True
