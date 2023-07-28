@@ -15,20 +15,6 @@ For 1 byte UTF-8 characters, the most significant bit is 0
 """
 
 
-def parseBin(n):
-    """parse a given integer to binary"""
-    bin_str = ""
-    num = n
-    while num > 0:
-        bin_str = str(num % 2) + bin_str
-        num //= 2
-    if len(bin_str) < 8:
-        bin_str = '0' + bin_str
-    if len(bin_str) > 8:
-        bin_str = bin_str[len(bin_str) - 8:]
-    return bin_str
-
-
 def validUTF8(data):
     """Validates UTF-8 data
     Args:
@@ -37,38 +23,6 @@ def validUTF8(data):
         bool: True if valid, else False
     """
     toVal = map(lambda n: n & 128, data)
-    bins = list(map(parseBin, data))
-    any_ = []
-    for n in range(len(bins)):
-        if bins[n].startswith('0'):
-            any_.append(0)
-        elif bins[n].startswith('110'):
-            if bins[n + 1].startswith('10'):
-                any_.append(0)
-                n += 1
-                continue
-            else:
-                any_.append(1)
-                break
-        elif bins[n].startswith('1110'):
-            if bins[n + 1].startswith('10') and bins[n + 2].startswith('10'):
-                any_.append(0)
-                n += 2
-                continue
-            else:
-                any_.append(1)
-                break
-        elif bins[n].startswith('11110'):
-            if bins[n + 1].startswith('10') and \
-                bins[n + 2].startswith('10') and \
-                    bins[n + 3].startswith('10'):
-                any_.append(0)
-                n += 3
-                continue
-            else:
-                any_.append(1)
-                break
-
     if any(toVal):
         return False
     return True
