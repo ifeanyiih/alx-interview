@@ -69,7 +69,7 @@ def validUTF8(data):
                 any_.append(1)
                 break
 
-#    if any(toVal):
-    if any(any_):
+    if any(toVal):
+#   if any(any_):
         return False
     return True
