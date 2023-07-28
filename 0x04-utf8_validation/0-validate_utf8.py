@@ -37,7 +37,6 @@ def validUTF8(data):
             shift -= 1
         binary_data.append(bin_)
 
-
     n = 0
     while n < len(binary_data):
         if binary_data[n].startswith('0'):
