@@ -29,6 +29,9 @@ def NQueens(n):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) == 1:
+        print("Usage: nqueens N")
+        exit(1)
     N = sys.argv[1]
     if len(sys.argv) > 2:
         print("Usage: nqueens N")
