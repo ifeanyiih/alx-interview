@@ -1,7 +1,10 @@
 #!/usr/bin/python3
+"""Making Change Interview question"""
 
 
-def makeChange(coins, total):
+def makeChange(coins: list, total: int) -> int:
+    """Determine the fewest number of coins
+    needed to meet a given total amount"""
     count = 0
     rem = total
     sortDesc = sorted(coins, reverse=True)
