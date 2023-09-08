@@ -49,6 +49,6 @@ def isWinner(x, nums):
             count += 1
     if Maria > Ben:
         Winner = 'Maria'
-    else:
+    if Ben > Maria:
         Winner = 'Ben'
     return Winner
