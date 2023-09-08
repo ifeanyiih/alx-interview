@@ -36,34 +36,17 @@ def isWinner(x, nums):
     Winner = None
     for i in range(x):
         round = rounds[i]
-        odd = 0
-        even = 0
         count = 1
+        round_iterator = iter((p for p in round if isPrime(p)))
         while True:
-            prime = False
-            for n in round:
-                if isPrime(n):
-                    prime = True
-                    val = n
-                    round = list(filter(lambda n: (n % val) != 0, round))
-                    if (count % 2) != 0:
-                        odd += 1
-                    else:
-                        even += 1
-                    break
+            prime = next(round_iterator, None)
+            if prime is None:
+                if count % 2 == 0:
+                    Maria += 1
                 else:
-                    continue
-            if prime is False:
-                if (count % 2) == 0:
-                    even -= 1
-                else:
-                    odd -= 1
+                    Ben += 1
                 break
             count += 1
-        if odd > even:
-            Maria += 1
-        else:
-            Ben += 1
     if Maria > Ben:
         Winner = 'Maria'
     else:
