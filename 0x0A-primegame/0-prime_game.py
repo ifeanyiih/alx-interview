@@ -31,7 +31,7 @@ def isWinner(x, nums):
         winner name: str
     """
     rounds = [list(range(1, i + 1)) for i in nums]
-    Max = 0
+    Maria = 0
     Ben = 0
     Winner = None
     for i in range(x):
@@ -61,11 +61,11 @@ def isWinner(x, nums):
                 break
             count += 1
         if odd > even:
-            Max += 1
+            Maria += 1
         else:
             Ben += 1
-    if Max > Ben:
-        Winner = 'Max'
+    if Maria > Ben:
+        Winner = 'Maria'
     else:
         Winner = 'Ben'
     return Winner
